@@ -1,0 +1,40 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install apache2 package and php library for apache2
+    apt:
+      name: 
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu" and ansible_distribution_version == "20.10"
+
+  - name: copy default html files for site
+    tags: ubuntu,copy_files
+    copy:
+      src: default_site.html
+      dest: /home/jake/index.html
+      owner: root
+      group: root
+      mode: 0644 
+
+- hosts: workstations
+  become: true
+  tasks:
+
+    - name: install unzip
+      package:
+       name: unzip
+
+    - name: install terraform
+      unarchive:
+        src: https://releases.hashicorp.com/terraform/0.14.9/terraform_0.14.9_linux_amd64.zip
+        dest: /usr/local/bin
+        remote_src: yes
+        mode: 0755
+        owner: root
+        group: root
