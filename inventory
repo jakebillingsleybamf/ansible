@@ -1,2 +1,5 @@
-[workstations]
+[netbox]
 192.168.16.102
+
+[dns_servers]
+192.168.16.2

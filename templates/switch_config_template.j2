@@ -1,0 +1,9 @@
+hostname {{ inventory_hostname }}
+!
+!
+interface vlan 1
+ desc Management
+ ip address {{ ansible_host }} 255.255.255.0
+!
+!
+

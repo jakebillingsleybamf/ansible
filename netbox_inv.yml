@@ -1,0 +1,9 @@
+---
+
+  plugin: netbox
+  api_enpoint: http://192.168.16.102:8000/
+  token:
+  validate_certs: False
+  config_context:  False
+  group_by:
+    - device_roles

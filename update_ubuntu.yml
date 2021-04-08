@@ -1,0 +1,25 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Perform updates
+    apt:
+      update_cache: yes
+      upgrade: dist
+    when: ansible_distribution == "Ubuntu"
+
+
+- hosts: dns_servers
+  become: true
+  tasks:
+
+  - name: Install bind on DNS servers
+    apt:
+      name: 
+        - bind9 
+        - bind9utils 
+        - bind9-doc
+      state: latest
+    when: ansible_distribution == "Ubuntu" 
